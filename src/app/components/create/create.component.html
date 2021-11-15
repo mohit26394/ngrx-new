@@ -1,0 +1,9 @@
+<div class="left">
+  <form [formGroup]="form">
+    <input type="number" formControlName="id" placeholder="id" #id>
+    <input type="text" formControlName="name" placeholder="name" #name>
+    <input type="text" formControlName="description" placeholder="description" #description>
+  </form>
+
+  <button (click)="addTutorial(id.value,name.value,description.value)">Add a Tutorial</button>
+</div>
