@@ -1,10 +1,12 @@
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { Tutorial } from './../../models/tutorial.model';
+import { User } from './../../models/tutorial.model';
 import { AppState } from './../../app.state';
 import { Component, OnInit } from '@angular/core';
 import { ColDef } from 'ag-grid-community';
 import * as TutorialActions from './../../actions/tutorial.action';
+import { BtnCellRenderer } from '../btn-cell-renderer';
 
 @Component({
   selector: 'app-read',
@@ -14,15 +16,33 @@ import * as TutorialActions from './../../actions/tutorial.action';
 
 export class ReadComponent implements OnInit {
 
-  tutorials: Observable<Tutorial[]>;
+  tutorials: Observable<User[]>;
 
+  frameworkComponents: any;
   columnDefs: ColDef[] = [
-    { field: 'id' },
-    { field: 'name' },
-    { field: 'description'}
+    {
+      field: "id", headerName: "Action",
+      cellRenderer: 'delCellRenderer',
+      cellRendererParams: {
+        clicked: function (field: any) {
+          // alert(`${field} was clicked`);
+          // this.deleteCurrentUser(`${field}`);
+
+          // this.store.dispatch(deleteUserObject({ user: `${field}` }));
+        }
+        // clicked: deleteCurrentUser(field)
+      },
+      maxWidth: 75
+    },
+    { field: 'firstName' },
+    { field: 'lastName'},
+    { field: 'age'},
+    { field: 'gender'},
+    { field: 'role'},
+    { field: 'experience'},
 ];
 
-rowData: Tutorial[] | undefined;
+rowData: User[] | undefined;
 // rowData = [
 //     { id: 'Toyota', name: 'Celica', description: 35000 },
 //     { id: 'Ford', name: 'Mondeo', description: 32000 },
@@ -30,7 +50,10 @@ rowData: Tutorial[] | undefined;
 // ];
 
   constructor(private store: Store<AppState>) { 
-    this.tutorials = store.select('tutorial');
+    this.frameworkComponents = this.frameworkComponents = {
+      delCellRenderer: BtnCellRenderer
+    };
+    this.tutorials = store.select('user');
 
     this.tutorials.subscribe(state =>{
       this.rowData = state;
@@ -44,7 +67,7 @@ rowData: Tutorial[] | undefined;
   }
 
   delTutorial(id: number) {
-    this.store.dispatch(new TutorialActions.RemoveTutorial(id) )
+    this.store.dispatch(new TutorialActions.RemoveUser(id) )
     console.log("delete clicked", id, Number(id));
     
   }

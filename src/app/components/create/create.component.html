@@ -1,9 +1,51 @@
 <div class="left">
   <form [formGroup]="form">
-    <input type="number" formControlName="id" placeholder="id" #id>
-    <input type="text" formControlName="name" placeholder="name" #name>
-    <input type="text" formControlName="description" placeholder="description" #description>
+
+    <label for="firstName" class="form-label">First Name</label>
+    <input class="margin-b-20" type="text" formControlName="firstName" #firstName>
+
+    <label for="firstName" class="form-label">Last Name</label>
+    <input class="margin-b-20" type="text" formControlName="lastName" #lastName>
+
+    <label for="firstName" class="form-label">Age</label>
+    <input class="margin-b-20" type="number" formControlName="age" #age>
+
+    <div class="margin-b-20">
+      Gender:
+
+      <input required formControlName="gender" class="form-check-input" type="radio" name="gender" id="radioMale"
+        value="male" #gender>
+      <label class="form-check-label" for="flexRadioDefault1">
+        Male
+      </label>
+      <input required formControlName="gender" class="form-check-input" type="radio" name="gender" id="radioFemale"
+        value="female" #gender>
+      <label class="form-check-label" for="flexRadioDefault2">
+        Female
+      </label>
+    </div>
+
+    <div class="margin-b-20">
+    Role:
+        <input required formControlName="role" value="frontEndDev" class="form-check-input" type="radio" name="role"
+          id="radioFrontEnd" #role>
+        <label class="form-check-label" for="flexRadioDefault1">
+          Front End
+        </label>
+      
+        <input required formControlName="role" value="backEndDev" class="form-check-input" type="radio" name="role"
+          id="radioBackEnd" #role>
+        <label class="form-check-label" for="flexRadioDefault2">
+          Back End
+        </label>
+        </div>
+
+    <label for="firstName" class="form-label">Years of Experience</label>
+    <input class="form-control" type="number" formControlName="experience" #experience>
+
   </form>
 
-  <button (click)="addTutorial(id.value,name.value,description.value)">Add a Tutorial</button>
+  <button
+    (click)="addTutorial(firstName.value,lastName.value,age.value, gender.value, role.value, experience.value)">Add
+    User</button>
 </div>

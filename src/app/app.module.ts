@@ -9,6 +9,7 @@ import { CreateComponent } from './components/create/create.component';
 
 import { reducers } from './reducers/tutorial.reducer'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BtnCellRenderer } from './components/btn-cell-renderer';
 
 @NgModule({
   declarations: [
@@ -20,8 +21,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    AgGridModule.withComponents([]),
-    StoreModule.forRoot({ tutorial: reducers } as ActionReducerMap<any, any>)
+    AgGridModule.withComponents([BtnCellRenderer]),
+    StoreModule.forRoot({ user: reducers } as ActionReducerMap<any, any>)
   ],
   providers: [],
   bootstrap: [AppComponent]
